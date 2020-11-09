@@ -1,6 +1,6 @@
 # Duo SecureX Orchestration workflows
 
-Create SecureX Casebook and Sigthings based on Duo Auth logs.
+Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 
 ![image](./Screen_Shot_Duo_fraud_casebook.png)
 <br/>
