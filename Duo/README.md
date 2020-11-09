@@ -3,6 +3,9 @@
 Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
 ![image](./Screen Shot Duo fraud casebook.png)
+<br/>
+![image](./Screen Shot Duo CTR.png)
+<br/>
 
 # Prerequisites:
 
@@ -50,5 +53,5 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 # 2. Quarantine Duo User.json
   This workflow give you access to quarantine user in Duo from the SecureX AO contextuel menu.
   
-# 
+# 3. Azure AD - lockdown user
 
