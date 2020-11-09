@@ -2,7 +2,7 @@
 
 Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 
-For any question please reach out to me at alexandre@argeris.net or aargeris@cisco.com
+For any questions or comments/bugs please reach out to me at alexandre@argeris.net or aargeris@cisco.com
 
 ![image](./Screen_Shot_Duo_fraud_casebook.png)
 <br/>
