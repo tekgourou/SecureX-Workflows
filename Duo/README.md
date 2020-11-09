@@ -1,4 +1,4 @@
-## Duo SecureX Orchestration workflows
+# Duo SecureX Orchestration workflows
 
 Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
@@ -8,6 +8,15 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 <br/>
 ![image](./Screen_Shot_Duo_Sigthings.png)
 <br/>
+
+# Main workflows:
+
+# 1. Duo Admin logs - Casebook and Singhtings.json
+  This workflow will fetch Duo (DENIDED or FRAUD) logs every 1hour (can be set by modifying the variable - interval - ). 
+  
+![image](./Screen_Shot_Duo_casebook_workflow.png)
+<br/>  
+
 # Prerequisites:
 
 1. Create an Admin API application in Duo and save the credentials.
@@ -42,8 +51,6 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
   This Atomic workflow action will fetch Duo auth denied and fraud logs.
 
-
-# You can use these workflows:
 
 # Remediation workflows
 
