@@ -1,0 +1,130 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4",
+    "name": "CTRGenerateAccessToken",
+    "title": "CTR Generate Access Token",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "output",
+          "name": "Access Token",
+          "type": "datatype.secure_string",
+          "description": "New Access Token",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Cisco Threat Response",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "description": "Generates a new Access Token for CTR using the API client credentials as specified in the Account key for the target used. This allows access to CTR APIs",
+      "display_name": "CTR Generate Access Token",
+      "favorite": false,
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01779LT1UMW8C3VMIAjbTPAIwdRfSoq3mgK",
+        "name": "HTTP Request",
+        "title": "Generate Access Token Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "grant_type=client_credentials",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ],
+          "display_name": "Generate Access Token Request",
+          "method": "POST",
+          "relative_url": "/oauth2/token",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0177E1888XEYT1EdtgWwun5NUEOdOMpKj9n",
+        "name": "JSONPath Query",
+        "title": "Fetch Access Token from Response",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Fetch Access Token from Response",
+          "input_json": "$activity.definition_activity_01779LT1UMW8C3VMIAjbTPAIwdRfSoq3mgK.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.access_token",
+              "jsonpath_query_name": "access_token",
+              "jsonpath_query_type": "string",
+              "zdate_type_format": ""
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0177E3MHH91271rFsrbHyQ36w9y4dAsjCMc",
+        "name": "Set Variables",
+        "title": "Set Access Token",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Access Token",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$",
+              "variable_value_new": "$activity.definition_activity_0177E1888XEYT1EdtgWwun5NUEOdOMpKj9n.output.jsonpath_queries.access_token$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}

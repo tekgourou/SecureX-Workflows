@@ -1,0 +1,378 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r",
+    "name": "CTR Create Casebook",
+    "title": "CTR Create Casebook",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "casebook notes",
+          "type": "datatype.string",
+          "description": "';' separated list of notes",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01FI7GJDK40MI6qNg2jcng0YaHlmz0Zgwq5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "casebook title",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "raw",
+          "scope": "input",
+          "name": "format",
+          "type": "datatype.string",
+          "description": "raw or md",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01FRLITVY3NO678mmPZHG5lCdqLjEyY2j1h",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "access_token",
+          "type": "datatype.secure_string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01E8OQUDV95VA45dnDR0Kzm5HlMxNSnk7HH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "notes",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "casebook observables",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01FI7NA9QZI9I46crflRbf7I6zIfajxuHrX",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "casebook_id",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01DSFE4QJSRYK67ewkTPGkJ0WaGxQSw7KjQ",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Cisco Threat Response",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "display_name": "CTR Create Casebook",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01FRLJHFEN1SQ7WuDVIKZxf15monuZEbDS3",
+        "name": "Condition Block",
+        "title": "check notes format",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "check notes format",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01FRLJHJZTRSJ7QyWj8lIs1e9AeNkKoHFuw",
+            "name": "Condition Branch",
+            "title": "Raw",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FRLITVY3NO678mmPZHG5lCdqLjEyY2j1h$",
+                "operator": "eq",
+                "right_operand": "raw"
+              },
+              "continue_on_failure": false,
+              "display_name": "Raw",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01FI7HEBRPD1J5ZgecRRHQefS9su8aaZhAA",
+                "name": "Split String",
+                "title": "Split String",
+                "type": "core.splitstring",
+                "base_type": "activity",
+                "properties": {
+                  "boundaries": [
+                    {
+                      "boundary": ";"
+                    }
+                  ],
+                  "continue_on_failure": false,
+                  "display_name": "Split String",
+                  "input_string": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7GJDK40MI6qNg2jcng0YaHlmz0Zgwq5$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01FI7I4HNMSGJ38IgHrEIDnGKQvV2bd2tUr",
+                "name": "Set Variables",
+                "title": "Add Casebook Notes",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Add Casebook Notes",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.local.variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C$",
+                      "variable_value_new": "| Title| $workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2$ |\n|------------------|:----------------:|"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01FI7KTDAHGD528XrelzC3sbn8h09RKS0ix",
+                "name": "For Each",
+                "title": "For Each",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01FI7HEBRPD1J5ZgecRRHQefS9su8aaZhAA.output.parts$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01FI7LLDVZWI45JFSILpCwCPyjEpgroJlTv",
+                    "name": "Set Variables",
+                    "title": "Add Casebook notes",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Add Casebook notes",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.local.variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C$",
+                          "variable_value_new": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.local.variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C$\n|Note|$activity.definition_activity_01FI7KTDAHGD528XrelzC3sbn8h09RKS0ix.input.source_array[@]$|"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01FRLJHLM4EZ24DOdwQ8F7n4vyUx2HkeYlW",
+            "name": "Condition Branch",
+            "title": "md",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FRLITVY3NO678mmPZHG5lCdqLjEyY2j1h$",
+                "operator": "eq",
+                "right_operand": "md"
+              },
+              "continue_on_failure": false,
+              "display_name": "md",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01FRLKNYXGWGL667poIRhQ5WZy0TqjghAtd",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.local.variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C$",
+                      "variable_value_new": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7GJDK40MI6qNg2jcng0YaHlmz0Zgwq5$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01FI7NKYAF5IU7RjOwOW7ICMWNx2325h1Lb",
+        "name": "Execute Python Script",
+        "title": "Create CTR Casebook Object",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Create CTR Casebook Object",
+          "script": "import hashlib\nimport json\nimport sys\nfrom datetime import datetime, date, timedelta\n\ndef today():\n    d = date.today()\n    return d.strftime(\"%Y-%m-%d\")\n\ndef create_casebook_object():\n    start_date = today()\n    casebook_obj_json = {}\n    casebook_obj_json[\"type\"] = \"casebook\"\n    casebook_obj_json[\"title\"] = \"Casebook for $workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2$ - \"+start_date\n    casebook_obj_json[\"texts\"] = []\n    observables = json.loads(sys.argv[2])\n    casebook_obj_json[\"observables\"] = observables\n    #casebook_obj_json[\"short_description\"] = \"Casebook for - $workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2$ - \"+start_date\n    casebook_obj_json[\"description\"] = sys.argv[1]\n    casebook_obj_json[\"schema_version\"] = \"1.0.11\"\n    casebook_obj_json[\"timestamp\"] = start_date\n    casebook_obj_json[\"source\"] = \"ao\"\n    casebook_obj_json[\"tlp\"] = \"amber\"\n    return json.dumps(casebook_obj_json)\n\ncasebook_obj = create_casebook_object()",
+          "script_arguments": [
+            "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.local.variable_workflow_01FI7H2FDTRTY5qHfR4WkyNbs8a0FUTaD5C$",
+            "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01FI7NA9QZI9I46crflRbf7I6zIfajxuHrX$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "casebook_obj",
+              "script_query_name": "casebook_obj",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01DS6GACSZOH33KPb04ijsPvkZanyA3udhH",
+        "name": "HTTP Request",
+        "title": "HTTP Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "accept": "application/json",
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "$activity.definition_activity_01FI7NKYAF5IU7RjOwOW7ICMWNx2325h1Lb.output.script_queries.casebook_obj$",
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.input.variable_workflow_01E8OQUDV95VA45dnDR0Kzm5HlMxNSnk7HH$"
+            }
+          ],
+          "display_name": "HTTP Request",
+          "method": "POST",
+          "relative_url": "/ctia/casebook",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01DSFEBKP88IJ3aPIPePyR96cwequXuJLbI",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_01DS6GACSZOH33KPb04ijsPvkZanyA3udhH.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.id",
+              "jsonpath_query_name": "id",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01DSFFV5UCH3Q1lrKK3uphRHZ8ZCHNCgEtm",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r.output.variable_workflow_01DSFE4QJSRYK67ewkTPGkJ0WaGxQSw7KjQ$",
+              "variable_value_new": "$activity.definition_activity_01DSFEBKP88IJ3aPIPePyR96cwequXuJLbI.output.jsonpath_queries.id$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
