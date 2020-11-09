@@ -4,7 +4,7 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
 ![image](./Screen Shot Duo fraud casebook.png)
 <br/>
-![image](Duo/Screen Shot Duo CTR.png)
+![image](https://raw.github.com/tekgourou/SecureX-Workflows/blob/main/Duo/Screen%20Shot%20Duo%20CTR.png)
 <br/>
 ![image](./Screen Shot Duo Sigthings.png)
 <br/>
