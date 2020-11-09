@@ -1,0 +1,555 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01JYJXB8C0HR54RRyaIVedcUYV0huuTdfl3",
+    "name": "Duo Admin logs - Casebook and Sightings",
+    "title": "Duo Admin logs - Casebook and Sightings",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 3600,
+          "scope": "local",
+          "name": "interval",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01JZJKVMAZYF24229wkg1zmzRqmTcXfmHRt",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "This Workflow will fetch DENIED and FRAUD Auth logs from Duo and create a Casebook / Sigthings in SecureX.\n\nThis workflow need to be run with a schedule.  Set the interval variable. Default is 3600 seconds (1h). ",
+      "display_name": "Duo Admin logs - Casebook and Sightings",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01JYQ3CR65QBD5tWih2BMCPXnrFWfcCxtlz",
+        "name": "Duo Admin - Get DENIED or FRAUD Auth Logs",
+        "title": "Duo Admin - Get DENIED or FRAUD Auth Logs",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Duo Admin - Get DENIED or FRAUD Auth Logs",
+          "input": {
+            "variable_workflow_01JYONCDL0ADB4IZLAcSVmveFdgbtqCxHrr": "$global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y.global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y$",
+            "variable_workflow_01JYONCDL0BHW58WNDfZAHRUxhWxd3GFbUH": "$global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ.global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ$",
+            "variable_workflow_01JYONCDL0CLA7V3TBrkPc7OVTkMcJ3l2u4": "$global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE.global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE$",
+            "variable_workflow_01JYONCDL0H167XHYbhT21jIScYmW8x6pL1": "$workflow.definition_workflow_01JYJXB8C0HR54RRyaIVedcUYV0huuTdfl3.local.variable_workflow_01JZJKVMAZYF24229wkg1zmzRqmTcXfmHRt$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01J3A78705B445iJVNwUAxCCDk1nqeNncIM",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01JYONCDVQVZ62K7SkNWdQCuAPUgfdRcFAF"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01JZ9SZGWG2A457iHAX9T5xJkdL6z5UgJMh",
+        "name": "Read Table from JSON",
+        "title": "Read  authlogs JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read  authlogs JSON",
+          "input_json": "$activity.definition_activity_01JYQ3CR65QBD5tWih2BMCPXnrFWfcCxtlz.output.variable_workflow_01JYONCDL03781exkHN1ukWFS4YmGF7OkuS$",
+          "jsonpath_query": "$.response.authlogs",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "access_device",
+              "column_type": "string"
+            },
+            {
+              "column_name": "alias",
+              "column_type": "string"
+            },
+            {
+              "column_name": "application",
+              "column_type": "string"
+            },
+            {
+              "column_name": "auth_device",
+              "column_type": "string"
+            },
+            {
+              "column_name": "email",
+              "column_type": "string"
+            },
+            {
+              "column_name": "event_type",
+              "column_type": "string"
+            },
+            {
+              "column_name": "factor",
+              "column_type": "string"
+            },
+            {
+              "column_name": "isotimestamp",
+              "column_type": "string"
+            },
+            {
+              "column_name": "odd_software",
+              "column_type": "string"
+            },
+            {
+              "column_name": "reason",
+              "column_type": "string"
+            },
+            {
+              "column_name": "result",
+              "column_type": "string"
+            },
+            {
+              "column_name": "timestamp",
+              "column_type": "string"
+            },
+            {
+              "column_name": "trusted_endpoint_status",
+              "column_type": "string"
+            },
+            {
+              "column_name": "txid",
+              "column_type": "string"
+            },
+            {
+              "column_name": "user",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01JZGG1400LCJ5YvVBeeId3jaLMrIB3Yy01",
+        "name": "CTRGenerateAccessToken",
+        "title": "CTRGenerateAccessToken",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "CTRGenerateAccessToken",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01JFR9G92ZGUP7SvCBlOa9kEQ0duoT1ZqpL",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": true,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01JZ9SZGWG2A457iHAX9T5xJkdL6z5UgJMh.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query access_device",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query access_device",
+              "input_json": "$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].access_device$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "browser",
+                  "jsonpath_query_name": "browser",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "browser_version",
+                  "jsonpath_query_name": "browser_version",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "hostname",
+                  "jsonpath_query_name": "hostname",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "ip",
+                  "jsonpath_query_name": "ip",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.city",
+                  "jsonpath_query_name": "city",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.country",
+                  "jsonpath_query_name": "country",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.state",
+                  "jsonpath_query_name": "state",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query auth_device",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query auth_device",
+              "input_json": "$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].auth_device$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "ip",
+                  "jsonpath_query_name": "auth_device_ip",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.city",
+                  "jsonpath_query_name": "auth_device_city",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.country",
+                  "jsonpath_query_name": "auth_device_country",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "location.state",
+                  "jsonpath_query_name": "auth_device_state",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "name",
+                  "jsonpath_query_name": "auth_device_name",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01JZGBP9E9BYK6PjVxV46cLInC6VyDhxlAj",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query application",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query application",
+              "input_json": "$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].application$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "key",
+                  "jsonpath_query_name": "application_key",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "name",
+                  "jsonpath_query_name": "application_name",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query user",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query user",
+              "input_json": "$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].user$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "groups",
+                  "jsonpath_query_name": "groups",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "key",
+                  "jsonpath_query_name": "user_key",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "name",
+                  "jsonpath_query_name": "username",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01JZGHMABAD8D1AeL0EgBulGckpIEbfyhJQ",
+            "name": "CTR Create Casebook",
+            "title": "CTR Create Casebook",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "CTR Create Casebook",
+              "input": {
+                "variable_workflow_01E8OQUDV95VA45dnDR0Kzm5HlMxNSnk7HH": "$activity.definition_activity_01JZGG1400LCJ5YvVBeeId3jaLMrIB3Yy01.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$",
+                "variable_workflow_01FI7GJDK40MI6qNg2jcng0YaHlmz0Zgwq5": "Protected APP : **$activity.definition_activity_01JZGBP9E9BYK6PjVxV46cLInC6VyDhxlAj.output.jsonpath_queries.application_name$**\n- Result: **$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].result$**\n- Reason: **$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].reason$**\n- Access Device location : **$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.city$, $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.state$, $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.country$**\n- Access Device IP: **$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$**\n- Browser : **$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.browser$ , $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.browser_version$**\n- Time : $activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].isotimestamp$\n- User: **$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$**\n- User Group: $activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.groups$\n- Email: $activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].email$\n- Auth Device Name : $activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_name$\n- Auth Device Location: **$activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_city$, $activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_state$, $activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_country$**\n- Auth Device IP: **$activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_ip$**\n",
+                "variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2": "Cisco Duo MFA $activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].result$ - $activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].reason$ user : $activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$",
+                "variable_workflow_01FI7NA9QZI9I46crflRbf7I6zIfajxuHrX": "[\n{\n\"type\": \"user\",\n\"value\": \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\"\n},\n{\n\"type\": \"ip\",\n\"value\": \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$\"\n}\n]",
+                "variable_workflow_01FRLITVY3NO678mmPZHG5lCdqLjEyY2j1h": "md"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01JFR9GPKB5YW3wQR95oQmbTfKKtVKpVbCz",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01JZHMN7CWYCV1DRRdIv3n3FvOXgNjD1DAy",
+            "name": "HTTP Request",
+            "title": "Create Sigthings",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n        \"schema_version\": \"1.0.11\",\n        \"observables\": [\n                {\"value\": \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$\", \"type\": \"ip\"},\n                {\"value\": \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\", \"type\": \"user\"}\n                ],\n        \"type\": \"sighting\",\n        \"title\": \"Hello I am an API created sighting\",\n        \"count\": 1,\n        \"targets\": [{\n                \"type\": \"user\",\n                \"observables\": [\n                    {\n                        \"value\": \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\",\n                        \"type\": \"user\"\n                    }\n                ],\n                \"observed_time\": {\n                    \"start_time\": \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].isotimestamp$\"\n                }\n            } \n        ],\n        \"relations\": [\n            {\n                \"origin\": \"Cisco Duo MFA\",\n                \"relation\": \"Connected_To\",\n                \"source\": {\n                    \"value\": \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$\",\n                    \"type\": \"ip\"\n                },\n                \"related\": {\n                    \"value\": \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\",\n                    \"type\": \"user\"\n                }\n              },\n             {\n                \"origin\": \"Cisco Duo MFA\",\n                \"relation\": \"Parent_Of\",\n                \"source\": {\n                    \"value\": \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\",\n                    \"type\": \"user\"\n                },\n                \"related\": {\n                    \"value\": \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$\",\n                    \"type\": \"ip\"\n                }\n              }\n\n        ],\n        \"tlp\": \"amber\",\n        \"source\": \"Cisco Duo MFA\",\n        \"description\": \"Automated sightings creation from Cisco Duo MFA\",\n        \"timestamp\": \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].isotimestamp$\",\n        \"confidence\": \"High\",\n        \"observed_time\": {\"start_time\": \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].isotimestamp$\",\n                          \"end_time\": \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].isotimestamp$\"\n                          },\n         \"data\": {\n            \"columns\": [\n                {\n                    \"name\": \"User\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Application\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Result\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Reason\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Access Device Location\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Access Device IP\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Browser\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Time\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Email\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Auth Device Name\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Auth Device Location\",\n                    \"type\": \"string\"\n                },\n                {\n                    \"name\": \"Auth Device IP\",\n                    \"type\": \"string\"\n                }            ],\n            \"rows\": [\n                [\n                    \"$activity.definition_activity_01JZGCSO44MLZ5Fjl6r3qk1qIGvuGtm4cJS.output.jsonpath_queries.username$\",\n                    \"$activity.definition_activity_01JZGBP9E9BYK6PjVxV46cLInC6VyDhxlAj.output.jsonpath_queries.application_name$\",\n                    \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].result$\",\n                    \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].reason$\",\n                    \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.city$, $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.state$, $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.country$\",\n                    \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.ip$\",\n                    \"$activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.browser$, $activity.definition_activity_01JZBK19U8D3V0sYgSUjkBITCejlhNQXPVs.output.jsonpath_queries.browser_version$\",\n                    \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].timestamp$\",\n                    \"$activity.definition_activity_01JZA41BSALUR4RG2rAk3ys680xN9YFjvXh.input.source_array[@].email$\",\n                    \"$activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_name$\",\n                    \"$activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_city$, $activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_state$, $activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_country$\",\n                    \"$activity.definition_activity_01JZG3AEPJ7MQ3hxTm5EeMd2qKNAC7eqr7F.output.jsonpath_queries.auth_device_ip$\"                \n                ]\n                  ],\n            \"row_count\": 1\n            }\n    }",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $activity.definition_activity_01JZGG1400LCJ5YvVBeeId3jaLMrIB3Yy01.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$"
+                }
+              ],
+              "display_name": "Create Sigthings",
+              "method": "POST",
+              "relative_url": "/ctia/sighting",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01JFR9GPKB5YW3wQR95oQmbTfKKtVKpVbCz"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "triggers": {
+    "triggerschedule_01JZJLH6PGPY72nnntRUACQoPcvTHZHUKwP": {
+      "workflow_id": "definition_workflow_01JYJXB8C0HR54RRyaIVedcUYV0huuTdfl3",
+      "name": "Every hour",
+      "title": "",
+      "lowercase_name": "schedule.every_hour",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01HW8M7A8CQK71LT9IHmr0kCTBJURhLdFDQ",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerschedule_01JZJLH6PGPY72nnntRUACQoPcvTHZHUKwP",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01HW8M7A8CQK71LT9IHmr0kCTBJURhLdFDQ": {
+      "unique_name": "schedule_01HW8M7A8CQK71LT9IHmr0kCTBJURhLdFDQ",
+      "name": "EVERY HOUR",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "01:00",
+        "interval_hours": 1,
+        "interval_minutes": 0,
+        "number_of_times": 23,
+        "display_name": "EVERY HOUR",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01J3A78705B445iJVNwUAxCCDk1nqeNncIM": {
+      "unique_name": "definition_target_01J3A78705B445iJVNwUAxCCDk1nqeNncIM",
+      "name": "Duo",
+      "title": "Duo",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "Duo",
+        "host": "api-dd9523a4.duosecurity.com",
+        "ignore_proxy": true,
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01JFR9G92ZGUP7SvCBlOa9kEQ0duoT1ZqpL": {
+      "unique_name": "definition_target_01JFR9G92ZGUP7SvCBlOa9kEQ0duoT1ZqpL",
+      "name": "CTR_For_Access_Token",
+      "title": "CTR Target for access token",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01JFR9F2QXC1S5hgf7tT7VE3mD7UMIbPc9g",
+        "description": "CTR_For_Access_Token",
+        "disable_certificate_validation": false,
+        "display_name": "CTR_For_Access_Token",
+        "host": "visibility.amp.cisco.com",
+        "no_runtime_user": false,
+        "path": "/iroh",
+        "protocol": "https"
+      }
+    },
+    "definition_target_01JFR9GPKB5YW3wQR95oQmbTfKKtVKpVbCz": {
+      "unique_name": "definition_target_01JFR9GPKB5YW3wQR95oQmbTfKKtVKpVbCz",
+      "name": "Private_CTIA_Target",
+      "title": "Private_CTIA_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Private_CTIA_Target",
+        "disable_certificate_validation": false,
+        "display_name": "Private_CTIA_Target",
+        "host": "private.intel.amp.cisco.com",
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01JFR9F2QXC1S5hgf7tT7VE3mD7UMIbPc9g": {
+      "unique_name": "definition_runtime_user_01JFR9F2QXC1S5hgf7tT7VE3mD7UMIbPc9g",
+      "name": "CTR_Credentials",
+      "title": "CTR_Credentials",
+      "description": "Account Key for CTR",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "CTR_Credentials"
+      }
+    }
+  },
+  "variables": {
+    "variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ": {
+      "unique_name": "variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ",
+      "properties": {
+        "value": "api-dd9523a4.duosecurity.com",
+        "scope": "global",
+        "name": "duo_host",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE": {
+      "unique_name": "variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE",
+      "properties": {
+        "value": "DI1VENY8MGIG2A4C0S8X",
+        "scope": "global",
+        "name": "duo_admin_ikey",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y": {
+      "unique_name": "variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "duo_admin_skey",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01JYONCDVQVZ62K7SkNWdQCuAPUgfdRcFAF",
+    "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4",
+    "definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r"
+  ]
+}
