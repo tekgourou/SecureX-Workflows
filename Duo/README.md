@@ -12,7 +12,7 @@ Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 # Main workflows:
 
 - Duo Admin logs - Casebook and Singhtings.json
-  This workflow will fetch Duo (DENIDED or FRAUD) logs every 1hour (can be set by modifying the variable - interval - ). 
+  This workflow will fetch Duo (DENIDED or FRAUD) logs every 1hour (can be set by modifying the variable - interval - ) and parse the output to create a casebook and sigthings in SecureX platform. 
   
 ![image](./Screen_Shot_Duo_casebook_workflow.png)
 <br/>  
