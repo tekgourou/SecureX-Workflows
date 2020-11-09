@@ -3,11 +3,11 @@
 Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 
 Use cases : 
-o	Track compromised Duo accounts
-o	Track Access Device and Auth Device IP and or country mismatch
-o	Track the potential source IP of guessing password scan
-o	Block Duo user in CTR
-o	Link cybercriminals IP(s) from a NGIPS event to a Duo denied authentication log during an investigation
+  - Track compromised Duo accounts
+  - Track Access Device and Auth Device IP and or country mismatch
+  - Track the potential source IP of guessing password scan
+  - Block Duo user in CTR
+  - Link cybercriminals IP(s) from a NGIPS event to a Duo denied authentication log during an investigation
 
 For any questions or comments/bugs please reach out to me at alexandre@argeris.net or aargeris@cisco.com
 
