@@ -2,6 +2,8 @@
 
 Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 
+For any question please reach out to me at alexandre@argeris.net or aargeris@cisco.com
+
 ![image](./Screen_Shot_Duo_fraud_casebook.png)
 <br/>
 ![image](./Screen_Shot_Duo_CTR.png)
@@ -64,5 +66,3 @@ Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
   This workflow give you access to quarantine user in Duo from the SecureX AO contextuel menu.
   
 - Azure AD - lockdown user (not documented yet)
-
-# For any question please reach out to me at alexandre@argeris.net or aargeris@cisco.com
