@@ -20,7 +20,8 @@ Create SecureX Casebook and Sigthings based on Duo Auth DENIED or FRAUD logs.
 # Prerequisites:
 
 - Create an Admin API application in Duo and save the credentials.
-
+    https://duo.com/docs/adminapi
+    
 - Copy these credentials into Cisco SecureX Orchestration variable section:
 
   - Admin Integration Key (iKey), Host as a string variables [duo_admin_ikey], [duo_host]
