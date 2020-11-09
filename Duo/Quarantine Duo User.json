@@ -1,0 +1,181 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01K1ZR169VAPG3dxRffOCtXd4AIH5vAQLj2",
+    "name": "Quarantine Duo User",
+    "title": "Quarantine Duo User",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01K1ZR15XVTK64x1X9s3hbPNrXY2Q8SAFFG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_type",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01K1ZR15XVY6O2oqsohYRvFGSfHIDnT7nE9",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Quarantine Duo User",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01K1ZR1P08F7D4lhZndYXsBSmHAEKYp239N",
+        "name": "Duo Admin - Get User",
+        "title": "Duo Admin - Get User",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Duo Admin - Get User",
+          "input": {
+            "variable_workflow_01FZJX8P5BGP06nz1KCT3dRi5iInbJ1c3xF": "$global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ.global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ$",
+            "variable_workflow_01FZJX8P5C5EA4lIOme77NwJxdG4m7R2b4o": "",
+            "variable_workflow_01FZJX8P5C8A56Ho3adp57ja1W3q7V35dqY": "$global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y.global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y$",
+            "variable_workflow_01FZJX8P5CA2Q21tCDhkKGwwqEqpCwCgalL": "$global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE.global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE$",
+            "variable_workflow_01FZJY3COHMOM6LbaSGHjXzeAXWZapVhwFt": "$workflow.definition_workflow_01K1ZR169VAPG3dxRffOCtXd4AIH5vAQLj2.input.variable_workflow_01K1ZR15XVTK64x1X9s3hbPNrXY2Q8SAFFG$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01J3A78705B445iJVNwUAxCCDk1nqeNncIM",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01FZJX8PI6FXQ3zNmJo4rj1tPsGRj58LQCB"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01K1ZR2M5Q8857Q11klxsYMJ19ae2Adkwhq",
+        "name": "Duo Admin - Block User By UserID",
+        "title": "Duo Admin - Block User By UserID",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Duo Admin - Block User By UserID",
+          "input": {
+            "variable_workflow_01JCLQ9QCOXMN61zZF8JkVLdOv1EaGwUDG2": "$activity.definition_activity_01K1ZR1P08F7D4lhZndYXsBSmHAEKYp239N.output.variable_workflow_01FZL3VTOM9P54dzQX4sjMnCbKG7UFoK3Dm$",
+            "variable_workflow_01JCLQ9QCOZZI5XQGIFAFdhcT7jft6V2qQZ": "$global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE.global.variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE$",
+            "variable_workflow_01JCLQ9QCP15T2sV0yA8F8jop0DTq0lrhvJ": "$global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ.global.variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ$",
+            "variable_workflow_01JCLQ9QCP5EQ1zHp0H831rvAis5ZdIFzyt": "$global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y.global.variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01J3A78705B445iJVNwUAxCCDk1nqeNncIM",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01JCLQ9QMVN4W3IC93cXg0oFdETENeeG9Jq"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m": {
+      "unique_name": "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "name": "response",
+      "title": "response",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ": {
+      "unique_name": "variable_01J3NMTLR7YNW6Mhw1jTeohcSLMbVqTHWbQ",
+      "properties": {
+        "value": "api-dd9523a4.duosecurity.com",
+        "scope": "global",
+        "name": "duo_host",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE": {
+      "unique_name": "variable_01JBFLXC643HF1ugwbVoGAFGk9Co2XntKOE",
+      "properties": {
+        "value": "DI1VENY8MGIG2A4C0S8X",
+        "scope": "global",
+        "name": "duo_admin_ikey",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y": {
+      "unique_name": "variable_01JBFMBVN62Y67X2aODY3UyX2L0ZC1inw0Y",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "duo_admin_skey",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01JCLQ9QMVN4W3IC93cXg0oFdETENeeG9Jq",
+    "definition_workflow_01FZJX8PI6FXQ3zNmJo4rj1tPsGRj58LQCB"
+  ]
+}
