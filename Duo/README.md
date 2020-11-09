@@ -57,10 +57,11 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 - Duo Admin - Block User By Username.json  
 
   This Atomics workflow action block a Duo user based on username. (Work only if the Duo user is local - not sync with Azure AD or Win AD)
-
+  credit to https://github.com/Gyuri1/duo-sxo
+  
 - Quarantine Duo User.json
   This workflow give you access to quarantine user in Duo from the SecureX AO contextuel menu.
   
-Azure AD - lockdown user
+- Azure AD - lockdown user (not documented yet)
 
 # For any question please reach out to me at alexandre@argeris.net or aargeris@cisco.com
