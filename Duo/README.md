@@ -1,4 +1,4 @@
-# Duo SecureX Orchestration workflows
+## Duo SecureX Orchestration workflows
 
 Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
@@ -6,7 +6,8 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
 <br/>
 ![image](./Screen Shot Duo CTR.png)
 <br/>
-
+![image](./Screen Shot Duo Sigthings.png)
+<br/>
 # Prerequisites:
 
 1. Create an Admin API application in Duo and save the credentials.
@@ -55,3 +56,4 @@ Create SecureX Casebook and Sigthings based on Duo Auth logs.
   
 # 3. Azure AD - lockdown user
 
+# For any question please reach out to me at alexandre@argeris.net or aargeris@cisco.com
