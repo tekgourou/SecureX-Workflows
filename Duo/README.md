@@ -2,6 +2,8 @@
 
 Create SecureX Casebook and Sigthings based on Duo Auth logs.
 
+![image](./Screen Shot Duo fraud casebook.png)
+
 # Prerequisites:
 
 1. Create an Admin API application in Duo and save the credentials.
