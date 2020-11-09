@@ -13,7 +13,7 @@ For any question please reach out to me at alexandre@argeris.net or aargeris@cis
 
 # Main workflows:
 
-- Duo Admin logs - Casebook and Singhtings.json
+- Duo Admin logs - Casebook and Sightings.json
   This workflow will fetch Duo (DENIDED or FRAUD) logs every 1hour (can be set by modifying the variable - interval - ) and parse the output to create a casebook and sigthings in SecureX platform. 
   
 ![image](./Screen_Shot_Duo_casebook_workflow.png)
